@@ -1,4 +1,4 @@
-# 🚀 AIBI Genie + Managed MCP Tutorial
+# 🚀 AI/BI Genie + Managed MCP Tutorial
 
 **Learn how to set up AI/BI Genie and connect it to Claude Desktop for natural language data queries**
 
@@ -22,7 +22,7 @@ Databricks provides 3 MCP options:
 - **External MCP servers** 
 - **Custom MCP servers** 
 
-![Databricks AI Agents and MCP Overview](visuals/2-ai-agents-mcp.png)
+![Databricks AI Agents and MCP Overview](visuals/1-ai-agents-mcp.gif)
 
 In this tutorial, we focus only on **Managed MCP servers**.
 
