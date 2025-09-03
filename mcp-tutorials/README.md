@@ -48,7 +48,7 @@ In this tutorial, we focus only on **Managed MCP servers**.
 
 1. **Navigate to AI/BI Genie**:
    - In your Databricks workspace, go to **Genie**
-   - Click **"Create Genie Space"**
+   - Click **"New"**
    - Select tables in Unity Catalog
    - Validate that it's working by asking a question
 
