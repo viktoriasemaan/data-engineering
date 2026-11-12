@@ -1,0 +1,8 @@
+# Agent Memory (Beta) SDK + CLI, with the LangGraph adapter (checkpointer, memory_tools)
+databricks-agentbricks[langgraph]==0.9.0
+databricks-langchain==0.21.0
+mcp<2
+python-dotenv>=1.0
+rich>=13
+# only for lakebase.py (a read-only look at the tables behind the stores)
+psycopg[binary]>=3.2

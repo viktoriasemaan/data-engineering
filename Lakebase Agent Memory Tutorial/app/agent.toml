@@ -1,0 +1,15 @@
+schema_version = 1
+
+[agent]
+framework = "langgraph"
+server = "agentbricks"
+deployment_name = "bean-byte-app"          # Databricks Apps name: agent-bricks-bean-byte-app
+
+[memory_store]
+name = "CHANGE-ME-bean-byte-memory"          # must be unique: pick your own
+
+[session_store]
+name = "CHANGE-ME-bean-byte-sessions"        # must be unique: pick your own
+
+[tracing]
+experiment_name = "/Shared/agentbricks_traces/bean-byte-app"
