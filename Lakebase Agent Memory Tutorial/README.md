@@ -7,6 +7,27 @@ then a memory pipeline. Then you look at the Lakebase tables underneath, and dep
 It uses [Databricks Agent Memory (Beta)](https://www.databricks.com/blog/introducing-agent-memory-databricks).
 Sessions and memories live in **Lakebase**, Databricks' serverless Postgres, in your workspace.
 
+![Agent Memory on Lakebase: what you build](./visuals/agent-memory-architecture.gif)
+
+## What you'll build
+
+Four types of memory, in two stores:
+
+| Memory type | What it holds | Where it lives | Scope |
+|---|---|---|---|
+| **Working** | the context window for one model call | the prompt | one call |
+| **Episodic** | every message, tool call and result, in order | session store | one conversation |
+| **Semantic** | facts and preferences: her store, how her team defines weekly sales | memory store | one user, across conversations |
+| **Procedural** | how-to recipes: the query that answers weekly sales | memory store | one user, across conversations |
+
+How a turn uses them:
+
+1. **Sign in.** The actor is the signed-in user's identity, never something the model chooses.
+2. **Append every step.** The checkpointer writes each message, tool call and result to the session store.
+3. **Recall and remember.** The agent loads the memory index at session start, searches memory (keyword and vector), and saves new facts with memory tools.
+4. **Distill offline.** A memory pipeline reads past conversations, extracts durable facts, merges duplicates and replaces facts that changed.
+5. **Start smarter.** The next conversation starts with what the agent knows: 3 tool calls instead of 10.
+
 ## The architecture in one paragraph
 
 ![Agent Memory reference architecture](./visuals/reference-architecture.png)
@@ -61,6 +82,13 @@ the counter, the app and delivery. The team's definition of weekly sales is coun
 nothing in the schema says so. An agent has to be told once, and then remember.
 
 Store names must be unique, so replace `bean-byte-*` below with your own prefix.
+
+## Six steps, one layer at a time
+
+![Six steps: one memory layer at a time](./visuals/tutorial-steps.png)
+
+Each step adds one layer to the same agent, and `chat.py` prints the tool calls, input tokens and seconds per
+turn, so you can see what each layer changes.
 
 ## Step 1 · No memory
 

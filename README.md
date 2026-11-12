@@ -1,8 +1,10 @@
 # 🚀 Data Engineering Portfolio
 
-Real-world data engineering projects and tutorials covering Data & AI technologies.
+Real-world data engineering projects and tutorials covering Data & AI technologies, from your first lakehouse to AI agents that use tools and remember their users.
 
 ## Projects
+
+The projects build on each other: a governed **lakehouse** holds the data, **AI agents** reach it through **MCP**, and **agent memory** lets them learn each user over time.
 
 ### 📊 [Lakehouse Tutorial](./lakehouse-tutorial/)
 Your first complete data engineering project - build a production lakehouse from scratch using Apple Health data. Learn Spark, Delta Lake, and Unity Catalog fundamentals.
@@ -12,24 +14,26 @@ Your first complete data engineering project - build a production lakehouse from
 ![Lakehouse Architecture](./lakehouse-tutorial/visuals/architecture-animated.gif)
 
 ### 🤖 [AI/BI Genie + Managed MCP Tutorial](./mcp-tutorials/)
-Set up AI/BI Genie and connect it to Claude Desktop through Managed MCP, so you can query your data in natural language. Learn how Databricks' managed, external and custom MCP servers fit together.
+An **AI agent** is an LLM that works in a loop: it reasons about a request, calls tools, reads the results and decides what to do next. **MCP (Model Context Protocol)** is the open standard that connects agents to those tools and data, so any MCP client, such as Claude Desktop, Cursor or your own agent, can use the same server. Databricks gives you three options: **managed** MCP servers for Genie spaces, Vector Search and Unity Catalog functions, **external** MCP servers from third parties, and **custom** MCP servers you host on Databricks Apps.
+
+In this tutorial you set up AI/BI Genie and connect it to Claude Desktop through Managed MCP, so you can query your data in natural language.
 
 **Skills:** AI/BI Genie • Managed MCP • Model Context Protocol • Claude Desktop • Natural Language Queries
 
-![Claude Desktop → Databricks Managed MCPs](./mcp-tutorials/visuals/1-managed-mcp.png)
+![AI Agents and MCP on Databricks](./mcp-tutorials/visuals/1-ai-agents-mcp.gif)
 
 ### 🧠 [Lakebase Agent Memory Tutorial](./Lakebase%20Agent%20Memory%20Tutorial/)
-Give an AI agent memory that survives restarts and follows each user across conversations. Build a LangGraph agent step by step with Databricks Agent Memory - session stores, memory stores and memory pipelines, all on Lakebase - then deploy it as a Databricks App.
+An agent forgets everything between conversations unless you give it memory. Build a LangGraph agent step by step with Databricks Agent Memory: a **session store** for episodic memory (every message and tool call in a conversation), a **memory store** for semantic and procedural memory (each user's facts, preferences and how-to recipes), and a **memory pipeline** that distills past conversations into durable memories. Everything lives on Lakebase, and you deploy the agent as a Databricks App.
 
 **Skills:** Agent Memory • Lakebase • Session & Memory Stores • Memory Pipelines • LangGraph • Databricks Apps
 
-![Agent Memory Reference Architecture](./Lakebase%20Agent%20Memory%20Tutorial/visuals/reference-architecture.png)
+![Agent Memory on Lakebase: what you build](./Lakebase%20Agent%20Memory%20Tutorial/visuals/agent-memory-architecture.gif)
 
 *More projects coming soon...*
 
 ---
 
-👋 **About:** This portfolio showcases hands-on data engineering projects designed for practitioners to advance their knowledge in the data & AI space. Each project includes complete tutorials, sample data, and production-ready patterns.
+👋 **About:** This portfolio showcases hands-on data engineering and AI agent projects designed for practitioners and solutions architects to advance their knowledge in the data & AI space. Each project includes complete tutorials, sample data, architecture diagrams, and production-ready patterns.
 
 ⭐ **Star this repo** if you find it helpful for your data engineering journey!
 
