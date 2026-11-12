@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+runs/
+*.pyc
+.ipynb_checkpoints/
+data/bean_byte.db
+app/data/bean_byte.db

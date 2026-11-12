@@ -9,6 +9,11 @@ Your first complete data engineering project - build a production lakehouse from
 
 **Skills:** Medallion Architecture • Unity Catalog • Delta Lake • Apache Spark • SQL Optimization • Data Quality
 
+### 🧠 [Lakebase Agent Memory Tutorial](./Lakebase%20Agent%20Memory%20Tutorial/)
+Build an agent with memory on Databricks, one layer at a time: session stores (episodic memory), memory stores (derived memory), and memory pipelines, all on Lakebase. Includes a runnable LangGraph agent, a notebook, and a deployable Databricks App.
+
+**Skills:** Agent Memory • Lakebase • Agent Bricks • LangGraph • Memory Pipelines • Databricks Apps
+
 *More projects coming soon...*
 
 ![Lakehouse Architecture](./lakehouse-tutorial/visuals/architecture-animated.gif)

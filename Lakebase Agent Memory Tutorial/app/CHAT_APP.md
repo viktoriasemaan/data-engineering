@@ -1,0 +1,76 @@
+# LangGraph Chat App Overlay
+
+`agentbricks init --framework langgraph` copies this framework-specific overlay after the base
+`agent-langgraph` template (it is included by default; `--disable-chat-app` opts out). It is
+intentionally not a post-generation mutation command.
+
+## Installed files
+
+- `ui/` contains the zero-build chat client.
+- `runtime/ui.py` serves the assets and exposes demo APIs for tools, memory, and sessions.
+- `runtime/main.py` installs the chat routes on the base FastAPI runtime.
+- `tests/test_demo_ui.py` verifies the browser-facing routes.
+
+## Behavior
+
+The capability indicators are automatic. Streaming and background reflect the runtime contract;
+Session reflects checkpoint history; Memory requires `AGENT_MEMORY_STORE`; Traces reflects the MLflow
+tracing config (destination + experiment). Selecting Memory opens a pane for browsing the store's
+entries (searchable, filterable by actor, with a modal for each entry); the other indicators expand
+in place, and Traces links out to the MLflow experiment. The transport selector is the only manual
+capability choice; hover or focus a mode to see what it does.
+
+Memory and session stores are off by default in `agentbricks dev`. The chat app shows "Not
+connected" for memory locally even when a store is bound, and the session indicator shows the
+in-process state. Both connect after `agentbricks deploy`. To use real stores locally, set
+`AGENT_MEMORY_STORE` and `AGENT_SESSION_STORE` in the project's `.env`.
+
+Tools opens a pane listing the `agent.toml` bindings, the Python tools from `agent.tools.all_tools()`,
+and the `agentbricks tools add …` commands to copy. It reads `GET /api/demo/tools`, which re-reads
+`agent.toml` on each request, so `tools add`/`remove` show up after a refresh. A bad `agent.toml` or
+`agent.tools` import shows as an error in the pane. MCP servers from `agent/mcps.py` are not listed.
+
+The Memory pane has two tabs. **Entries** browses the store's memories by actor. In a deployed app
+with both stores bound, **Pipeline** shows the memory pipeline for that session store + memory store
+pair (`GET /api/demo/memory/pipeline`): its model, trigger, instructions, and five most recent runs.
+A dot on the Pipeline tab marks a failed latest run. **Run now** (`POST
+/api/demo/memory/pipeline/run`) asks for confirmation first, because a run can rewrite, merge, or
+delete any memory in the store, then refreshes every 10 seconds until the run finishes. With no
+pipeline the pane shows the `agentbricks memory pipeline create` command; create, update, pause,
+resume, and delete stay in the CLI. Under `agentbricks dev`, or without both stores, the pane makes
+no pipeline calls.
+
+The composer's model picker lists the workspace's Unity Catalog AI Gateway chat model services — the
+`system.ai.*` model services from `GET /api/2.1/unity-catalog/model-services?parent=schemas/system.ai`
+(embeddings-only services filtered out), exposed as `GET /api/demo/models` and pinned to
+`agent.agent.MODEL` as the default. Each request sends the selected model as `model` in the
+invocation body; the agent is rebuilt per turn, so the picker changes the model for the next turn
+without a restart. Discovery is best-effort: if listing is unavailable (e.g. `system.ai` isn't
+readable), the picker falls back to just the default. Omitting `model` uses `MODEL`.
+
+The agent calls the chosen model through the gateway (`<host>/ai-gateway/mlflow/v1`) rather than
+`/serving-endpoints`, so `MODEL` is a `system.ai.*` model service name. The picker includes every listed
+model, with the project default first and the rest alphabetical. Selecting a model changes only the
+model for this page; the project agent's instructions and tools still run. Reload to reset.
+
+**Foreground** displays the complete answer; **Background** checks the run status until it
+finishes, without a browser deadline. Failed or disconnected streams show an error. Chat displays
+answer text blocks as Markdown, with readable reasoning in a collapsed **Reasoning** section.
+Signatures and encrypted reasoning are excluded from the chat display. Raw HTML is escaped
+and images are not loaded; Copy preserves the original Markdown.
+
+The UI reads local history from the LangGraph checkpoint and managed history from Session Store
+items. It keeps a stable application session UUID in browser local storage, sends it as every
+durable invocation's top-level `session_id`, and also uses the same value in the independent
+`X-Routing-Key` header for sticky routing; each turn gets a separate invocation UUID.
+It also sends the signed-in user as `input.actor`, so memory carries across that user's chat
+sessions.
+
+The Sessions card creates new session UUIDs in the browser. With a managed Session Store,
+`GET /api/demo/sessions` lists the most recent sessions for the signed-in actor and each Open action
+calls `POST /api/demo/sessions/{session_id}/open`. Opening a session verifies ownership and reloads
+its transcript and pending LangGraph state. In local in-memory mode only the current browser session
+can be listed because there is no shared session index.
+
+Transcript responses include only user, assistant, tool, system, and human-decision message items;
+checkpoint fragments remain in Session Store but are never returned to the chat UI.
