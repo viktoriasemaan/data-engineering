@@ -62,7 +62,7 @@ Lakebase branch, and permissions are granted per store.
 
 - A Databricks workspace with **Agent Memory (Beta)** enabled
 - The Databricks CLI, signed in: `databricks auth login --profile <name>`
-- Python 3.11 or later
+- Python 3.11 to 3.13 (tested with 3.12). On a brand-new Python release, pip can try to compile some dependencies from source.
 - Access to a `system.ai` chat model through the AI Gateway. The default is `system.ai.claude-sonnet-5-5`; change `MODEL` in `agent/agent.py`.
 
 ## Setup
@@ -193,7 +193,7 @@ To start from scratch instead: `agentbricks init my-agent`, then copy in `coffee
 ## Clean up
 
 ```bash
-python scripts/cleanup.py                                    # bean-byte-* pipelines, memory store and session stores
+python scripts/cleanup.py --prefix bean-byte                 # pipelines, memory store and session stores named bean-byte-*; use your own prefix
 agentbricks deployments delete agent-bricks-bean-byte-app    # if you deployed Step 6
 ```
 
