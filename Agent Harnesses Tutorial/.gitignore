@@ -1,0 +1,7 @@
+.env
+.homes/
+runs/
+results/runs.jsonl
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
