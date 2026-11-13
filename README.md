@@ -4,7 +4,7 @@ Real-world data engineering projects and tutorials covering Data & AI technologi
 
 ## Projects
 
-The projects build on each other: a governed **lakehouse** holds the data, **AI agents** reach it through **MCP**, and **agent memory** lets them learn each user over time.
+The projects build on each other: a governed **lakehouse** holds the data, **AI agents** reach it through **MCP**, **agent memory** lets them learn each user over time, and the **agent harness** around the model decides how much each answer costs.
 
 ### 📊 [Lakehouse Tutorial](./lakehouse-tutorial/)
 Your first complete data engineering project - build a production lakehouse from scratch using Apple Health data. Learn Spark, Delta Lake, and Unity Catalog fundamentals.
@@ -28,6 +28,13 @@ An agent forgets everything between conversations unless you give it memory. Bui
 **Skills:** Agent Memory • Lakebase • Session & Memory Stores • Memory Pipelines • LangGraph • Databricks Apps
 
 ![Agent Memory on Lakebase: what you build](./Lakebase%20Agent%20Memory%20Tutorial/visuals/agent-memory-architecture.gif)
+
+### ⚖️ [Agent Harnesses Tutorial](./Agent%20Harnesses%20Tutorial/)
+A coding agent is a model plus a **harness**: the loop, the tools, the context, memory and permissions around it. Run **Claude Code**, **Codex** and **Hermes Agent** on the same task and the same model through **Unity Gateway**, grade every run with hidden tests, and read the bill from the gateway's usage table. All three get it right; on the same Claude Opus 5.5 model, one costs 2.4x another, because caching is a harness feature.
+
+**Skills:** Agent Harnesses • Claude Code • Codex CLI • Hermes Agent • Unity Gateway • Prompt Caching • Cost per Task
+
+![Agent Harnesses Explained: one model, one gateway, three harnesses](./Agent%20Harnesses%20Tutorial/visuals/harness-comparison.png)
 
 *More projects coming soon...*
 
