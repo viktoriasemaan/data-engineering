@@ -4,7 +4,7 @@ Real-world data engineering projects and tutorials covering Data & AI technologi
 
 ## Projects
 
-The projects build on each other: a governed **lakehouse** holds the data, **AI agents** reach it through **MCP**, **agent memory** lets them learn each user over time, and the **agent harness** around the model decides how much each answer costs.
+The projects build on each other: a governed **lakehouse** holds the data, **AI agents** reach it through **MCP**, **agent memory** lets them learn each user over time, the **agent harness** around the model decides how much each answer costs, and **distillation** turns a big model's answers into a small model you serve yourself.
 
 ### 📊 [Lakehouse Tutorial](./lakehouse-tutorial/)
 Your first complete data engineering project - build a production lakehouse from scratch using Apple Health data. Learn Spark, Delta Lake, and Unity Catalog fundamentals.
@@ -35,6 +35,13 @@ A coding agent is a model plus a **harness**: the loop, the tools, the context, 
 **Skills:** Agent Harnesses • Claude Code • Codex CLI • Hermes Agent • Unity Gateway • Prompt Caching • Cost per Task
 
 ![Agent Harnesses Explained: one model, one gateway, three harnesses](./Agent%20Harnesses%20Tutorial/visuals/harness-comparison.png)
+
+### 🧪 [LLM Distillation Tutorial](./LLM%20Distillation%20Tutorial/)
+Do you need a 120-billion-parameter model to sort a support ticket? A big **teacher** (OpenAI's gpt-oss-120b) labels 400 tickets with `ai_query`, a small **student** (Qwen3.5 0.8B) is fine-tuned on those answers with **LoRA on AI Runtime**, **MLflow** evaluates teacher, base model and student on 100 held-out tickets, and the student is served on **Model Serving** and compared through **Unity Gateway**. The student routes as well as its teacher (95 of 100), almost 3x faster, with a tenth of the input; the break-even is about 7,900 tickets an hour. Along the way: total vs active parameters, mixture of experts, tokens, prefill, the KV cache and prompt caching.
+
+**Skills:** Distillation • LoRA • AI Runtime (Serverless GPU) • Foundation Model APIs • ai_query • MLflow Evaluation • Model Serving • Unity Gateway
+
+![LLM distillation on Databricks: what you build](./LLM%20Distillation%20Tutorial/images/architecture.png)
 
 *More projects coming soon...*
 
