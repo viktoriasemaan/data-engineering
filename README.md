@@ -47,7 +47,7 @@ Do you need a 120-billion-parameter model to sort a support ticket? A big **teac
 
 ---
 
-👋 **About:** This portfolio showcases hands-on data engineering and AI agent projects designed for practitioners and solutions architects to advance their knowledge in the data & AI space. Each project includes complete tutorials, sample data, architecture diagrams, and production-ready patterns.
+👋 **About:** This portfolio showcases hands-on data engineering and AI agent projects designed for practitioners and solutions architects to advance their knowledge in the data & AI space. Each project includes complete tutorials, sample data, architecture diagrams, and production-ready patterns. For open models and AI agents on CoreWeave, see [AI Cloud Tutorials](https://github.com/viktoriasemaan/ai-cloud-tutorials).
 
 ⭐ **Star this repo** if you find it helpful for your data engineering journey!
 
